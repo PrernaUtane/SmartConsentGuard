@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>⚠ Suspicious Website Detected — SmartConsent Guard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="warning-page">
+
+  <div class="warning-container">
+
+    <!-- ─── Top Header ─────────────────────────────────── -->
+    <div class="warning-header">
+      <div class="warning-shield">🚨</div>
+      <div class="warning-title">Suspicious Website Detected</div>
+      <div class="warning-domain">
+        Attempting to visit: <strong id="warning-url">—</strong>
+      </div>
+      <div class="warning-score-badge" id="score-badge">
+        Risk Score: <span id="warning-score">—</span> / 100
+      </div>
+    </div>
+
+    <!-- ─── Reasons ─────────────────────────────────────── -->
+    <div class="warning-body">
+      <div class="warning-reasons-title">🔍 Why This Site Was Blocked</div>
+      <div id="reasons-list">
+        <div class="reason-item">
+          <span class="reason-bullet">•</span>
+          <span>Analysing risk factors…</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── Action Buttons ──────────────────────────────── -->
+    <div class="warning-actions">
+      <button class="btn btn-safe" id="btn-go-back">
+        ← Go Back
+      </button>
+      <button class="btn btn-ghost" id="btn-proceed">
+        Enter Anyway →
+      </button>
+    </div>
+
+    <!-- ─── Footer ──────────────────────────────────────── -->
+    <div class="warning-footer">
+      SmartConsent Guard · AI-Powered Browser Security · Trust Score Engine v1.0
+    </div>
+
+  </div>
+
+  <script src="warning.js"></script>
+</body>
+</html>

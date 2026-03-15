@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartConsent Guard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Popup-only overrides */
+    body { overflow-y: auto; }
+
+    #loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 18px;
+      gap: 14px;
+    }
+
+    #loading-state p {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    #backend-offline {
+      margin: 12px 18px;
+      padding: 10px 12px;
+      background: rgba(255, 165, 2, 0.08);
+      border: 1px solid rgba(255, 165, 2, 0.25);
+      border-radius: var(--radius-sm);
+      font-size: 11px;
+      color: var(--accent-orange);
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+  </style>
+</head>
+<body class="popup">
+
+  <!-- ─── Header ─────────────────────────────────────── -->
+  <div class="header">
+    <div class="header-logo">🛡</div>
+    <div>
+      <div class="header-title">SmartConsent Guard</div>
+      <div class="header-subtitle">Security Analysis</div>
+    </div>
+  </div>
+
+  <!-- ─── Backend Offline Warning ──────────────────── -->
+  <div id="backend-offline">
+    ⚠ Backend offline — start the FastAPI server on port 8000
+  </div>
+
+  <!-- ─── Status Banner ────────────────────────────── -->
+  <div id="status-banner" class="status-banner scanning">
+    <div class="pulse-dot"></div>
+    <span id="status-text">Scanning page…</span>
+  </div>
+
+  <!-- ─── Loading State ────────────────────────────── -->
+  <div id="loading-state">
+    <div class="spinner"></div>
+    <p>Analyzing site security…</p>
+  </div>
+
+  <!-- ─── Main Content (hidden until data arrives) ── -->
+  <div id="main-content" style="display:none;">
+
+    <!-- Site Info -->
+    <div class="site-info">
+      <div class="site-label">Current Site</div>
+      <div class="site-url" id="site-url">—</div>
+    </div>
+
+    <!-- Risk Score Ring -->
+    <div class="risk-score-container">
+      <div class="score-ring">
+        <svg viewBox="0 0 72 72">
+          <circle class="score-ring-bg" cx="36" cy="36" r="30"/>
+          <circle class="score-ring-fill" id="score-ring-fill" cx="36" cy="36" r="30"/>
+        </svg>
+        <div class="score-number" id="score-number">—</div>
+      </div>
+      <div class="score-details">
+        <div class="risk-level-badge" id="risk-level-badge">Analyzing…</div>
+        <div class="score-label" id="score-label">Risk Score / 100</div>
+      </div>
+    </div>
+
+    <!-- Detected Clauses -->
+    <div class="section" id="clauses-section" style="display:none;">
+      <div class="section-title">⚠ Detected Risks</div>
+      <div id="clauses-list"></div>
+    </div>
+
+    <!-- Explanation -->
+    <div class="section" id="explanation-section" style="display:none;">
+      <div class="section-title">📋 Risk Explanation</div>
+      <div class="explanation-box" id="explanation-text"></div>
+    </div>
+
+    <!-- Empty State (no policy found) -->
+    <div id="no-policy-state" class="empty-state" style="display:none;">
+      <div class="empty-icon">🔍</div>
+      <div class="empty-title">No Policy Detected</div>
+      <div class="empty-text">
+        No Terms & Conditions or Privacy Policy was found on this page.<br>
+        Navigate to a page with legal text for analysis.
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="btn-group">
+      <button class="btn btn-safe" id="btn-allow">
+        ✅ Allow Site
+      </button>
+      <button class="btn btn-danger" id="btn-block">
+        🚫 Block Site
+      </button>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
